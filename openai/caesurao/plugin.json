@@ -1,0 +1,101 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "caesurao-alpha",
+  "version": "0.4.0-alpha.1",
+  "description": "Experimental CaesuraO response guidance for opt-in preview testing. Skills are not stable and may change without notice.",
+  "author": {
+    "name": "CaesuraO",
+    "url": "https://caesurao.com",
+    "email": "support@caesura.io"
+  },
+  "homepage": "https://caesurao.com",
+  "license": "UNLICENSED",
+  "keywords": [
+    "communication",
+    "response-design",
+    "productivity"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "CaesuraO Alpha (Preview)",
+        "shortDescription": "Experimental response-guidance preview",
+        "longDescription": "Opt-in preview of CaesuraO response-guidance skills for interpersonal situations and difficult moments. These skills are experimental, not stable, and may change or regress. Uses the production CaesuraO service and real account credits. Enable either stable or alpha, not both. CaesuraO gives the assistant guidance for interpersonal messages, difficult news, and emotionally significant moments in everyday work. It analyzes selected text with identities and secrets masked, helping the assistant respond thoughtfully without hiding facts or turning your task into coaching. Requires a connected CaesuraO account. You can ask to stop analysis in the current chat.",
+        "developerName": "CaesuraO",
+        "category": "Productivity",
+        "capabilities": [
+          "Response guidance"
+        ],
+        "websiteURL": "https://caesurao.com",
+        "privacyPolicyURL": "https://caesurao.com/privacy",
+        "termsOfServiceURL": "https://caesurao.com/tos",
+        "defaultPrompt": [
+          "Help me reply to this difficult message without escalating things.",
+          "Help me explain a disappointing result clearly and thoughtfully.",
+          "Help me decline this request while keeping a clear boundary."
+        ],
+        "brandColor": "#208D76",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/icon.svg"
+      },
+      "onboardingSkill": "./skills/setup/SKILL.md",
+      "review": {
+        "test_cases": {
+          "positive": [
+            {
+              "description": "manager-deadline",
+              "prompt": "Help me reply. Alice (alice@example.test) wrote: \"This is the second delay. I need a firm delivery date today.\" The work depends on security approval; no date is known.",
+              "tools_triggered": "analyze",
+              "expected_behavior": "Mask the identity, quote faithfully, acknowledge impact and avoid inventing a delivery date."
+            },
+            {
+              "description": "weekend-boundary",
+              "prompt": "Help me tell my friend I cannot host this weekend. They keep assuming I will say yes.",
+              "tools_triggered": "analyze",
+              "expected_behavior": "Draft a clear boundary without inventing motives or excessive apology."
+            },
+            {
+              "description": "no-solution",
+              "prompt": "None of the options meet my budget, and this trip matters to my family. Help me explain that we cannot do it as planned.",
+              "tools_triggered": "analyze",
+              "expected_behavior": "State the limitation and significance honestly; offer only feasible alternatives."
+            },
+            {
+              "description": "positive-delicate",
+              "prompt": "I was promoted and my teammate was not. Help me announce it without sounding insensitive.",
+              "tools_triggered": "analyze",
+              "expected_behavior": "Recognize the achievement without presuming the teammate's feelings; telling them privately first is appropriate."
+            },
+            {
+              "description": "repair",
+              "prompt": "I interrupted my coworker in a meeting. Help me apologize without making excuses.",
+              "tools_triggered": "analyze",
+              "expected_behavior": "Acknowledge the specific impact without dramatic self-blame."
+            }
+          ],
+          "negative": [
+            {
+              "description": "neutral-css",
+              "prompt": "Center this div using flexbox.",
+              "tools_triggered": "none",
+              "expected_behavior": "Complete the technical task directly."
+            },
+            {
+              "description": "opt-out",
+              "prompt": "Stop CaesuraO analysis in this chat.",
+              "tools_triggered": "none",
+              "expected_behavior": "Acknowledge without sending the opt-out to the backend."
+            },
+            {
+              "description": "routine-draft",
+              "prompt": "Write a one-line message saying the meeting is at 3pm.",
+              "tools_triggered": "none",
+              "expected_behavior": "Draft the neutral logistical message directly."
+            }
+          ]
+        },
+        "commerce": false
+      }
+    }
+  }
+}

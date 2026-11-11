@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "caesurao": {
+      "type": "http",
+      "url": "https://app.caesurao.com/api/mcp/assistant"
+    }
+  }
+}

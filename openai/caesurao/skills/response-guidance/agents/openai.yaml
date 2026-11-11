@@ -1,0 +1,12 @@
+interface:
+  display_name: "CaesuraO Alpha Response Guidance"
+  short_description: "Care and clarity for responses with human stakes"
+dependencies:
+  tools:
+    - type: "mcp"
+      value: "caesurao-assistant"
+      description: "CaesuraO assistant analysis for everyday responses"
+      transport: "streamable_http"
+      url: "https://app.caesurao.com/api/mcp/assistant"
+policy:
+  allow_implicit_invocation: true

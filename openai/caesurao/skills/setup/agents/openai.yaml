@@ -1,0 +1,5 @@
+interface:
+  display_name: "Set up CaesuraO Alpha"
+  short_description: "Connect CaesuraO and understand analysis controls"
+policy:
+  allow_implicit_invocation: true

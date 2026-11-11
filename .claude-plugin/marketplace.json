@@ -1,0 +1,16 @@
+{
+  "name": "caesurao-alpha",
+  "owner": {
+    "name": "CaesuraO",
+    "email": "support@caesura.io"
+  },
+  "description": "Experimental CaesuraO preview plugins. Not stable; for opt-in testing only.",
+  "plugins": [
+    {
+      "name": "caesurao-alpha",
+      "source": "./plugins/caesurao",
+      "description": "Experimental response-guidance skills. Not stable; for opt-in testing only.",
+      "category": "productivity"
+    }
+  ]
+}
