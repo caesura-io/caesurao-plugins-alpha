@@ -7,6 +7,8 @@ description: "Gets response guidance from CaesuraO for answers, drafts, and inte
 
 CaesuraO analyzes the human side of a situation and returns guidance for your next response. Keep your role and the user's task: the guidance shapes how you answer, draft, or ask, not what the task is. The user's explicit instructions come first.
 
+The tool is `analyze` on the CaesuraO assistant connector (`/api/mcp/assistant`, not the agent connector at `/api/mcp`). It takes one string, `transcript`.
+
 ## When to call
 
 People always communicate more than their literal words, so do not dismiss a brief, practical, or restrained remark as meaningless. Call `analyze` once, before your first draft or answer, whenever the way you respond could matter to the user or to someone else: messages to or from people, conflict, requests and refusals, apologies, difficult or delicate news, decisions that involve others, or a user who seems to be under strain. This includes signs that appear in passing, in quoted text, or in results from other tools. When unsure, call.

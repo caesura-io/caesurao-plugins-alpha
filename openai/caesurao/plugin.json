@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "caesurao-alpha",
-  "version": "0.4.0-alpha.3",
+  "version": "0.5.0-alpha.1",
   "description": "Help the assistant respond with care and clarity in interpersonal situations and difficult moments during everyday tasks.",
   "author": {
     "name": "CaesuraO",
