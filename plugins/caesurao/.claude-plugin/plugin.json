@@ -1,7 +1,7 @@
 {
   "name": "caesurao-alpha",
   "displayName": "CaesuraO Alpha (Preview)",
-  "version": "0.4.0-alpha.1",
+  "version": "0.4.0-alpha.2",
   "description": "Experimental CaesuraO response guidance for opt-in preview testing. Skills are not stable and may change without notice.",
   "author": {
     "name": "CaesuraO",
