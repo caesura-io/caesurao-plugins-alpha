@@ -6,20 +6,32 @@
 
 Enable only one CaesuraO channel in a host at a time. Stable and alpha provide the same skills and connect to the same assistant MCP; enabling both can duplicate guidance requests and consume extra credits. To switch, disable or uninstall the previous plugin, install the other channel, and start a new session.
 
-Alpha uses the **production** service, not a sandbox. Analyses consume real credits and follow the same storage/privacy terms as stable. The connected account’s environment selects its analysis preset; installing alpha does not select a testing preset automatically.
+Preview analyses use your account’s credits and follow the same privacy and storage terms as stable.
+
+## Before installing the private marketplace
+
+Each tester needs a GitHub account with read access to `caesura-io/caesurao-plugins-alpha`. Ask the CaesuraO team for repository access first.
+
+For ChatGPT desktop, Codex, and Claude Code, use SSH:
+
+1. Configure an SSH key for the GitHub account that has repository access. Add its public key under GitHub Settings → SSH and GPG keys. See [GitHub’s SSH setup instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
+2. Verify access from Terminal before adding the marketplace:
+
+   ```sh
+   git ls-remote git@github.com:caesura-io/caesurao-plugins-alpha.git HEAD
+   ```
+
+   Successful access prints a commit hash and `HEAD`. Resolve any SSH authentication or host prompts in Terminal first. `Permission denied (publickey)` means SSH authentication needs attention; a repository-not-found error can mean the account lacks access.
+3. Follow the host-specific steps below. Keep SSH authentication available for future marketplace updates.
+
+The `owner/repo` shorthand clones over HTTPS in ChatGPT/Codex. Without configured HTTPS credentials, it can fail with `could not read Username ... terminal prompts disabled`. Use the SSH URL below. Local SSH credentials do not authorize a cloud-hosted Claude app or workspace; those hosts need their own GitHub access.
 
 ## Install in Claude Code
 
-In a Claude Code session, run:
+After completing the SSH prerequisites, run this in a Claude Code session:
 
 ```text
-/plugin install caesurao-alpha --marketplace caesura-io/caesurao-plugins-alpha
-```
-
-Or add the marketplace explicitly, then install:
-
-```text
-/plugin marketplace add caesura-io/caesurao-plugins-alpha
+/plugin marketplace add git@github.com:caesura-io/caesurao-plugins-alpha.git
 /plugin install caesurao-alpha@caesurao-alpha
 ```
 
@@ -31,39 +43,32 @@ Choose the installation scope when prompted. Start a new session, run `/mcp`, se
 2. Install **CaesuraO Alpha (Preview)**.
 3. Open its Connectors settings, choose Connect, and complete CaesuraO OAuth sign-in.
 
-For a private repository, your host must have authorized GitHub access to it; local SSH access alone does not grant the Claude web app access. If the host or workspace cannot import the private marketplace, use Claude Code with authorized Git credentials or ask the workspace administrator to enable access. Private installation support must be verified in each target host.
+For a private repository, your host must have authorized GitHub access to it; local SSH access alone does not grant the Claude web app access. If the host or workspace cannot import the private marketplace, use Claude Code with authorized Git credentials or ask the workspace administrator to enable access.
 
 ## Install in Codex
 
 ```sh
-codex plugin marketplace add caesura-io/caesurao-plugins-alpha
+codex plugin marketplace add git@github.com:caesura-io/caesurao-plugins-alpha.git
 codex plugin add caesurao-alpha@caesurao-alpha
 ```
 
 Start a new session, select **CaesuraO Alpha (Preview)**, and complete the host’s CaesuraO connection flow if prompted. Ask whether CaesuraO is connected: the setup skill uses `get_account`, which sends no analysis text and consumes no analysis credits.
 
-For a private GitHub repository, first authenticate with an account that can read it:
+## Install in ChatGPT desktop
 
-```sh
-gh auth login
-gh auth setup-git
-```
-
-Alternatively, add the marketplace using SSH with an already configured GitHub SSH key:
+After completing the SSH prerequisites, use Codex CLI to register the marketplace from Terminal:
 
 ```sh
 codex plugin marketplace add git@github.com:caesura-io/caesurao-plugins-alpha.git
 ```
 
-The marketplace is named `caesurao-alpha` regardless of whether it was added through HTTPS or SSH.
+Fully quit and reopen ChatGPT. Open the Plugins Directory, choose the `caesurao-alpha` marketplace, and install **CaesuraO Alpha (Preview)**. Complete the CaesuraO OAuth connection flow, then start a new chat. Do not enter `caesura-io/caesurao-plugins-alpha` as the marketplace source when relying on SSH: that shorthand selects HTTPS.
 
-## Install in ChatGPT
-
-Where Git-backed plugin marketplaces are available, import `caesura-io/caesurao-plugins-alpha` through the plugin marketplace controls and install **CaesuraO Alpha (Preview)**. In a managed workspace, an administrator may need to import the repository and authorize private GitHub access. Complete the CaesuraO connection flow, then start a new chat. Availability and menu names vary by host and workspace; these Git marketplace steps do not imply a public directory listing.
+This command requires [Codex CLI](https://developers.openai.com/codex/cli/) on your machine. For a cloud-managed ChatGPT workspace marketplace, an administrator must configure the workspace’s GitHub access separately; local SSH keys do not provide cloud access.
 
 ## Update an existing installation
 
-**Claude Code:** refresh the catalog and update the installed plugin from your shell:
+**Claude Code:** with repository access and SSH authentication still available, refresh the catalog and update the installed plugin from your shell:
 
 ```sh
 claude plugin marketplace update caesurao-alpha
@@ -81,20 +86,20 @@ codex plugin marketplace upgrade caesurao-alpha
 codex plugin add caesurao-alpha@caesurao-alpha
 ```
 
-Start a new session and check the installed version in `/plugins`. **ChatGPT:** refresh/sync the imported marketplace and installed plugin through the host’s plugin controls, or ask the workspace administrator to sync it, then start a new chat. Running sessions can retain the skills they already loaded.
+Start a new session and check the installed version in `/plugins`.
 
-If an old version remains, verify repository access and the installed version before reinstalling this channel. Reconnect CaesuraO through the host’s OAuth controls if prompted; never paste passwords, API keys, or login codes into a chat.
+**ChatGPT desktop:** refresh the registered SSH marketplace from Terminal:
+
+```sh
+codex plugin marketplace upgrade caesurao-alpha
+```
+
+Fully quit and reopen ChatGPT, check the installed plugin version in the Plugins Directory and apply an available update, then start a new chat. For a cloud-managed marketplace, ask the workspace administrator to sync it. Running sessions can retain the skills they already loaded.
+
+If an update reports `terminal prompts disabled`, check the configured marketplace source: it should be the SSH URL above, not the HTTPS URL. Verify SSH repository access with the `git ls-remote` command before retrying. If an old version remains, check the installed version and refresh the marketplace before reinstalling this channel. Reconnect CaesuraO through the host’s OAuth controls if prompted; never paste passwords, API keys, or login codes into a chat.
 
 ## Pause, disconnect, and data
 
 Say “Stop CaesuraO analysis in this chat” to pause analysis in the current conversation, and “Resume CaesuraO analysis” to resume. To disconnect the account, use the host’s connector controls. Selected text and results are handled under the [Privacy Policy](https://caesurao.com/privacy) and [Terms of Service](https://caesurao.com/tos). Masking is performed by the assistant and is not guaranteed anonymization.
-
-## Development
-
-The package folders remain `plugins/caesurao/` (Claude) and `openai/caesurao/` (ChatGPT/Codex) in both repositories; the stable plugin and marketplace are named `caesurao`, and alpha uses `caesurao-alpha`. The response-guidance description and body should match across hosts; host-specific frontmatter and setup instructions can differ.
-
-This first alpha starts from stable 0.3.1 and is versioned 0.4.0-alpha.1. Bump both plugin manifests together for each new preview. Alpha changes do not automatically release to stable; promote a reviewed, tested snapshot explicitly.
-
-Scenario evals live in the CaesuraO monorepo (`integrations/`). Point eval runners at this checkout with `CAESURAO_PLUGINS_DIR=../caesurao-plugins-alpha`. The existing monorepo package checker expects the stable identity; alpha currently needs its own identity checks plus `claude plugin validate --strict` on the repository and Claude package. Keep private eval results and backend preset prompts out of distribution repositories.
 
 Support: support@caesura.io

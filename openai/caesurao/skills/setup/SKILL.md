@@ -3,9 +3,9 @@ name: setup
 description: Set up CaesuraO when the user installs the plugin or asks how to connect, use, pause, or resume it, or whether it is connected. Explain account linking and text analysis without running a sample analysis or changing other chats.
 ---
 
-# Set up CaesuraO Alpha
+# Set up CaesuraO
 
-Keep setup brief. Explain that this is the experimental CaesuraO Alpha plugin: its skills are not stable, it uses the production CaesuraO service and real credits, and the user should enable either stable or alpha rather than both. Explain that CaesuraO gives the assistant response guidance for interpersonal situations and difficult moments during ordinary tasks. The assistant continues the original task and uses recommendations without presenting an analysis report. This is not therapy or diagnosis.
+Keep setup brief. Explain that CaesuraO gives the assistant response guidance for interpersonal situations and difficult moments during ordinary tasks. The assistant continues the original task and uses recommendations without presenting an analysis report. This is not therapy or diagnosis.
 
 Explain before first use that selected task-related text is sent to CaesuraO, with identifying details and secrets masked by the assistant. Do not promise perfect anonymization. Analyses use the connected account's credits, and submitted text and results are stored under the [Privacy Policy](https://caesurao.com/privacy) and [Terms of Service](https://caesurao.com/tos). Do not invent a retention period or promise that data is never stored.
 

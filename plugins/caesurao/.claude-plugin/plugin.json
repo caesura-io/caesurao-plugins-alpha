@@ -1,8 +1,8 @@
 {
   "name": "caesurao-alpha",
   "displayName": "CaesuraO Alpha (Preview)",
-  "version": "0.4.0-alpha.2",
-  "description": "Experimental CaesuraO response guidance for opt-in preview testing. Skills are not stable and may change without notice.",
+  "version": "0.4.0-alpha.3",
+  "description": "Helps Claude respond with care and clarity in interpersonal situations and difficult moments during everyday tasks, using response guidance from your CaesuraO account.",
   "author": {
     "name": "CaesuraO",
     "email": "support@caesura.io",
