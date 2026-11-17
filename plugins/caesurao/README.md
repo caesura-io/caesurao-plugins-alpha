@@ -1,6 +1,6 @@
 # CaesuraO Alpha for Claude
 
-> **Experimental preview: these skills are not stable.** Use [stable CaesuraO](https://github.com/caesura-io/caesurao-plugins) for everyday work. Analyses use your account’s credits. Enable only one channel at a time.
+> **Experimental preview: these skills are not stable.** Use stable CaesuraO for everyday work. Analyses use your account’s credits. Enable only one channel at a time.
 
 CaesuraO helps Claude respond with care and clarity when a task carries human stakes: replying to a difficult message, setting a boundary, apologizing, delivering disappointing news, or working through a task while frustrated or under pressure. Before answering in those situations, Claude asks CaesuraO for brief response guidance and applies it quietly, while completing the task you asked for. It is not therapy or diagnosis.
 
@@ -18,31 +18,23 @@ A CaesuraO account with service access, accepted Terms of Service, and available
 
 ## Install and update
 
-For the private marketplace, your GitHub account needs repository access and a configured SSH key. Ask the CaesuraO team for access, then follow [GitHub’s SSH setup instructions](https://docs.github.com/en/authentication/connecting-to-github-with-ssh).
+In the Claude app or Cowork, open **Customize → Plugins → Add marketplace**, enter `caesura-io/caesurao-plugins-alpha`, and install **CaesuraO Alpha (Preview)**. To update, sync the marketplace in plugin settings, check the installed version, and start a new conversation.
 
-Verify access in Terminal first and resolve any SSH prompts there:
-
-```sh
-git ls-remote git@github.com:caesura-io/caesurao-plugins-alpha.git HEAD
-```
-
-Then, in a Claude Code session:
+In Claude Code:
 
 ```text
-/plugin marketplace add git@github.com:caesura-io/caesurao-plugins-alpha.git
+/plugin marketplace add caesura-io/caesurao-plugins-alpha
 /plugin install caesurao-alpha@caesurao-alpha
 ```
 
-For Claude apps and Cowork, open Customize → Plugins → Add marketplace, enter `caesura-io/caesurao-plugins-alpha`, and install **CaesuraO Alpha (Preview)**. Private repositories require authorized GitHub access in the host; configuring local SSH alone does not authorize Claude web or Cowork.
-
-To update from your shell, keep repository access and SSH authentication available:
+To update from your shell, then start a new session:
 
 ```sh
 claude plugin marketplace update caesurao-alpha
 claude plugin update caesurao-alpha@caesurao-alpha
 ```
 
-Start a new session. In Claude apps, sync the marketplace in plugin settings, verify the installed version, and start a new conversation. Enable automatic sync where available. See the [repository README](../../README.md) for repository access troubleshooting, other hosts, channel switching, and full update instructions.
+See the [repository README](../../README.md) for other apps and channel switching.
 
 ## Connect
 
